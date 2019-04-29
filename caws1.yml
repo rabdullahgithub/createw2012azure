@@ -15,7 +15,7 @@
       resource_group: "{{ my_resource_group }}"
       account_type: Standard_LRS
 
-  - name: provision new Azure virtual host
+  - name: PROVSION VIRTUAL HOST
     azure_rm_virtualmachine:
       admin_username: richard
       admin_password: A#celinn0!!!
@@ -33,7 +33,7 @@
       virtual_network_name: "{{ my_vn_name }}"
       subnet_name: "{{ my_sn_name }}"
 
-  - name: create Azure vm extension to enable HTTPS WinRM listener
+  - name: CREATE AZURE VM EXTENSION TO ENABLE HTTPS WINRM LISTENER
     azure_rm_virtualmachine_extension:
       name: winrm-extension
       resource_group: "{{ my_resource_group }}"
