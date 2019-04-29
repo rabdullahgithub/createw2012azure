@@ -11,12 +11,20 @@
   tasks:
   - name: CREATE AZURE STORAGE ACCOUNT
     azure_rm_storageaccount:
+      subscription_id: "{{ my_subscription_id }}"
+      client_id: "{{ my_client_id }}"
+      secret: "{{ my_secret }}"
+      tenant: "{{ my_tenant }}"
       name: '{{ my_vm_name }}'
       resource_group: "{{ my_resource_group }}"
       account_type: Standard_LRS
 
   - name: PROVSION VIRTUAL HOST
     azure_rm_virtualmachine:
+      subscription_id: "{{ my_subscription_id }}"
+      client_id: "{{ my_client_id }}"
+      secret: "{{ my_secret }}"
+      tenant: "{{ my_tenant }}"
       admin_username: richard
       admin_password: A#celinn0!!!
       os_type: Windows
@@ -35,6 +43,10 @@
 
   - name: CREATE AZURE VM EXTENSION TO ENABLE HTTPS WINRM LISTENER
     azure_rm_virtualmachine_extension:
+      subscription_id: "{{ my_subscription_id }}"
+      client_id: "{{ my_client_id }}"
+      secret: "{{ my_secret }}"
+      tenant: "{{ my_tenant }}"
       name: winrm-extension
       resource_group: "{{ my_resource_group }}"
       virtual_machine_name: "{{ my_vm_name }}"
