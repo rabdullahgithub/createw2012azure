@@ -1,30 +1,51 @@
 ---
-- name: CREATE WINDOWS 2012 R2 SERVER
-  connection: local
-  gather_facts: no
-  hosts: all
+- name: AZURE CREATE W2012 R2 SERVER
+  hosts: localhost
+  vars:
+    my_resource_group: MyResourceGroup
+    my_vm_name: anspocw2012
+    my_vn_name: poc-vn
+    my_sn_name: poc-sn
+    winrm_enable_script: SQBuAHYAbwBrAGUALQBFAHgAcAByAGUAcwBzAGkAbwBuACAALQBDAG8AbQBtAGEAbgBkACAAKAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABTAHkAcwB0AGUAbQAuAE4AZQB0AC4AVwBlAGIAQwBsAGkAZQBuAHQAKQAuAEQAbwB3AG4AbABvAGEAZABTAHQAcgBpAG4AZwAoACcAaAB0AHQAcABzADoALwAvAHIAYQB3AC4AZwBpAHQAaAB1AGIAdQBzAGUAcgBjAG8AbgB0AGUAbgB0AC4AYwBvAG0ALwBhAG4AcwBpAGIAbABlAC8AYQBuAHMAaQBiAGwAZQAvAGQAZQB2AGUAbAAvAGUAeABhAG0AcABsAGUAcwAvAHMAYwByAGkAcAB0AHMALwBDAG8AbgBmAGkAZwB1AHIAZQBSAGUAbQBvAHQAaQBuAGcARgBvAHIAQQBuAHMAaQBiAGwAZQAuAHAAcwAxACcAKQApADsAIABFAG4AYQBiAGwAZQAtAFcAUwBNAGEAbgBDAHIAZQBkAFMAUwBQACAALQBSAG8AbABlACAAUwBlAHIAdgBlAHIAIAAtAEYAbwByAGMAZQA=
 
   tasks:
-  - name: CREATING VIRTUAL MACHINE
-    azure_rm_virtualnetwork:
-      name: poc-vn
-      state: present
-      resource_group: MyResourceGroup
-      subscription_id: "{{ my_subscription_id }}"
-      client_id: "{{ my_client_id }}"
-      secret: "{{ my_secret }}"
-      tenant: "{{ my_tenant }}"
-      address_prefixes_cidr: "10.1.0.0/16"
-      dns_servers: "8.8.8.8"
+  - name: CREATE AZURE STORAGE ACCOUNT
+    azure_rm_storageaccount:
+      name: '{{ my_vm_name }}'
+      resource_group: "{{ my_resource_group }}"
+      account_type: Standard_LRS
 
-  - name: CREATING SUBNET
-    azure_rm_subnet:
-      subscription_id: "{{ my_subscription_id }}"
-      client_id: "{{ my_client_id }}"
-      secret: "{{ my_secret }}"
-      tenant: "{{ my_tenant }}"
-      name: poc-sn
+  - name: provision new Azure virtual host
+    azure_rm_virtualmachine:
+      admin_username: richard
+      admin_password: A#celinn0!!!
+      os_type: Windows
+      image:
+        offer: WindowsServer
+        publisher: MicrosoftWindowsServer
+        sku: 2012-R2-Datacenter
+        version: latest
+      name: "{{ my_vm_name }}"
+      resource_group: "{{ my_resource_group }}"
       state: present
-      virtual_network_name: poc-vn
-      resource_group: MyResourceGroup
-      address_prefix_cidr: "{{ my_address_prefix_cidr }}"
+      vm_size: Standard_D1
+      storage_account_name: "{{ my_vm_name }}"
+      virtual_network_name: "{{ my_vn_name }}"
+      subnet_name: "{{ my_sn_name }}"
+
+  - name: create Azure vm extension to enable HTTPS WinRM listener
+    azure_rm_virtualmachine_extension:
+      name: winrm-extension
+      resource_group: "{{ my_resource_group }}"
+      virtual_machine_name: "{{ my_vm_name }}"
+      publisher: Microsoft.Compute
+      virtual_machine_extension_type: CustomScriptExtension
+      type_handler_version: 1.9
+      settings: '{"commandToExecute": "powershell.exe -ExecutionPolicy ByPass -EncodedCommand {{winrm_enable_script}}"}'
+      auto_upgrade_minor_version: true
+
+  - name: wait for the WinRM port to come online
+    wait_for:
+      port: 5986
+      host: '{{azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress}}'
+      timeout: 600
