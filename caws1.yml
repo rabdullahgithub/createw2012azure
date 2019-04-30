@@ -56,8 +56,9 @@
       settings: '{"commandToExecute": "powershell.exe -ExecutionPolicy ByPass -EncodedCommand {{winrm_enable_script}}"}'
       auto_upgrade_minor_version: true
 
-  - name: wait for the WinRM port to come online
+  - name: WAIT FOR WINRM TO GO ONLINE
     wait_for:
       port: 5986
       host: '{{azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress}}'
       timeout: 600
+    tags: waitwinrm
