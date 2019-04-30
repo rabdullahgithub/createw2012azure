@@ -26,4 +26,5 @@
 
   - name: DISPLAY RESULTS
     debug:
-      msg: "{{ ansible_facts['azure_publicipaddresses']['ipAddress'] }}"
+      msg: "{{ ansible_facts.azure_publicipaddresses.ipAddress(0) }}"
+#      msg: "{{ ansible_facts['azure_publicipaddresses']['ipAddress'] }}"
