@@ -15,6 +15,7 @@
       client_id: "{{ my_client_id }}"
       secret: "{{ my_secret }}"
       tenant: "{{ my_tenant }}"
+      location: eastus
 #    register: rawdata
 
 
