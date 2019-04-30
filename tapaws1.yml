@@ -15,8 +15,7 @@
       client_id: "{{ my_client_id }}"
       secret: "{{ my_secret }}"
       tenant: "{{ my_tenant }}"
-#      location: eastus
-#    register: rawdata
+    register: output_ip_address
 
 
 #  - name: Update
@@ -26,6 +25,6 @@
 
   - name: DISPLAY RESULTS
     debug:
-      msg: "{{ azure_rm_publicipaddress_facts['azure_publicipaddresses']['properties']['ipAddress'] }}"
+      msg: "{{ output_ip_address.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}"
 #      msg: "{{ ansible_facts['azure_publicipaddresses']['properties']['ipAddress'] }}"
 #      msg: "{{ ansible_facts['azure_publicipaddresses']['ipAddress'] }}"
