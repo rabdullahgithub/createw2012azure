@@ -1,0 +1,17 @@
+---
+- name: WINRM
+  hosts: winrm
+  vars:
+    ansible_user: richard
+    ansible_password: A#celinn0!!!
+    ansible_port: 5986
+    ansible_connection: winrm
+    ansible_winrm_server_cert_validation: ignore
+  gather_facts: true
+
+  tasks:
+
+  - name: Update
+    win_updates:
+      host: '{{azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress}}'
+    register: reboot
