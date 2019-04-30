@@ -11,5 +11,5 @@
     register: reboot
 
   -name: DEBUG
-    debug:
+   debug:
       msg: "{{ azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress }}"
