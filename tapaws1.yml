@@ -24,7 +24,7 @@
 #      remote_addr: "{{ azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress }}"
 #    register: reboot
 
-#  - name: DISPLAY RESULTS
-#    debug:
-#      msg: "{{ ansible_facts.azure_publicipaddresses.ipAddress(0) }}"
+  - name: DISPLAY RESULTS
+    debug:
+      msg: "{{ ansible_facts['azure_publicipaddresses']['properties']['ipAddress'] }}"
 #      msg: "{{ ansible_facts['azure_publicipaddresses']['ipAddress'] }}"
