@@ -10,6 +10,7 @@
 #      remote_addr: "{{ azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress }}"
     register: reboot
 
-  -name: DEBUG
-   debug:
+  - name: DISPLAY RESULTS
+    debug
       msg: "{{ azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress }}"
+      
