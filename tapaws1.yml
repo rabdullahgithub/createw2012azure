@@ -15,8 +15,6 @@
       client_id: "{{ my_client_id }}"
       secret: "{{ my_secret }}"
       tenant: "{{ my_tenant }}"
-      name: '{{ my_vm_name }}'
-      resource_group: "{{ my_resource_group }}"
 #    register: rawdata
 
 
