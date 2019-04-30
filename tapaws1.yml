@@ -23,6 +23,7 @@
 
   – name: CHECK FOR MISSING UPDATES
     win_updates:
+      host: output_ip_address.ansible_facts.azure_publicipaddresses[0].properties.ipAddress
       category_names: SecurityUpdates
       state: searched
     register: update_count
