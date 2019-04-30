@@ -1,6 +1,6 @@
 ---
 - name: WINRM
-  hosts: winrm
+  hosts: localhost
   vars:
     ansible_user: richard
     ansible_password: A#celinn0!!!
