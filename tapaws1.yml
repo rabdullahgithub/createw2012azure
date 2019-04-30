@@ -9,7 +9,8 @@
 
   tasks:
   - name: OBTAIN IP ADDRESS
-    azure_rm_publicipaddress_facts:
+    azure_rm_virtualmachineimage_facts:
+#    azure_rm_publicipaddress_facts:
       subscription_id: "{{ my_subscription_id }}"
       client_id: "{{ my_client_id }}"
       secret: "{{ my_secret }}"
