@@ -1,6 +1,5 @@
 ---
 - name: WINRM
-  hosts: localhost
   hosts: wrm
 
   tasks:
@@ -13,4 +12,3 @@
   - name: DISPLAY RESULTS
     debug
       msg: "{{ azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress }}"
-      
