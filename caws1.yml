@@ -63,8 +63,13 @@
       timeout: 600
 
   - name: GENERATE SECURITY UPDATE REPORT
-    win_updates: category_names=SecurityUpdates state=searched log_path=/var/log/winsecurity/ansible_wu.txt
+    win_updates:
+      category_names: SecurityUpdates
+      state: searched
+      log_path: /var/log/winsecurity/ansible_wu.txt
 
   - name: INSTALL SECURITY UPDATES
-    win_updates: category_names=SecurityUpdates
-    
+    win_updates:
+      category_names: SecurityUpdates
+      state: installed
+      
