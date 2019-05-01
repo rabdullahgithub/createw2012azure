@@ -67,9 +67,10 @@
       category_names: SecurityUpdates
       state: searched
       log_path: /var/log/winsecurity/ansible_wu.txt
+    tags: gsur
 
   - name: INSTALL SECURITY UPDATES
     win_updates:
       category_names: SecurityUpdates
       state: installed
-      
+    tags: gsur
