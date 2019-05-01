@@ -28,6 +28,6 @@
       state: searched
     register: update_count
 
-  - name: DISPLAY MISSING UPDATE RESULTS
+  - name: DISPLAY MISSING UPDATE RESULTSS
     debug:
       msg: "{{ update_count }}"
