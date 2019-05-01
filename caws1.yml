@@ -62,20 +62,21 @@
       host: '{{azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress}}'
       timeout: 600
 
-  - name: GENERATE SECURITY UPDATE REPORT
-    win_updates:
-      category_names: SecurityUpdates
-      state: searched
+#  - name: GENERATE SECURITY UPDATE REPORT
+#    win_updates:
+#      category_names: SecurityUpdates
+#      state: searched
 #      log_path: /var/log/winsecurity/ansible_wu.txt
-    register: server_security
-    tags: gsur
-
-  - name: SECURITY UPDATE REPORT
-    debug: "{{ server_security }}"
-    tags: gsur
+#    register: server_security
+#    tags: gsur
 
   - name: INSTALL SECURITY UPDATES
     win_updates:
       category_names: SecurityUpdates
       state: installed
+    register: server_security
+    tags: gsur
+
+  - name: SECURITY UPDATE REPORT
+    debug: "{{ server_security }}"
     tags: gsur
