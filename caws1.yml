@@ -61,4 +61,10 @@
       port: 5986
       host: '{{azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress}}'
       timeout: 600
-    tags: waitwinrm
+
+  - name: GENERATE SECURITY UPDATE REPORT
+    win_updates: category_names=SecurityUpdates state=searched log_path=/var/log/winsecurity/ansible_wu.txt
+
+  - name: INSTALL SECURITY UPDATES
+    win_updates: category_names=SecurityUpdates
+    
