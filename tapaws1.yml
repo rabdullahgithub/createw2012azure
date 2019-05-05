@@ -1,6 +1,6 @@
 ---
 - name: WINRM SERVER TEST
-  hosts: wrm
+  hosts: localhost
   vars:
     my_resource_group: MyResourceGroup
     my_vm_name: anspocw2012
@@ -9,7 +9,6 @@
 
   tasks:
   - name: OBTAIN WINDOW SERVER IP ADDRESS
-#    azure_rm_virtualmachineimage_facts:
     azure_rm_publicipaddress_facts:
       subscription_id: "{{ my_subscription_id }}"
       client_id: "{{ my_client_id }}"
@@ -23,7 +22,6 @@
 
   – name: CHECK FOR MISSING UPDATES
     win_updates:
-#      host: output_ip_address.ansible_facts.azure_publicipaddresses[0].properties.ipAddress
       category_names: SecurityUpdates
       state: searched
     register: update_count
