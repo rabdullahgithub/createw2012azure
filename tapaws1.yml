@@ -1,6 +1,7 @@
 ---
 - name: WINRM SERVER TEST
-  hosts: wrm
+#  hosts: wrm
+  hosts: localhost
   vars:
     my_resource_group: MyResourceGroup
     my_vm_name: anspocw2012
