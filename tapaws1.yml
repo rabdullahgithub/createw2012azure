@@ -1,15 +1,19 @@
 ---
-- name: WINRM SERVER TEST
-#  hosts: wrm
+- name: PATCH AZURE VM
   hosts: all
-  vars:
-    my_resource_group: MyResourceGroup
-    my_vm_name: anspocw2012
-    my_vn_name: poc-vn
-    my_sn_name: poc-sn
-  gather_facts: true
 
   tasks:
+  – name: CHECK FOR MISSING UPDATES
+    win_updates:
+      category_names: SecurityUpdates
+      state: searched
+    register: update_count
+
+  - name: DISPLAY MISSING UPDATE RESULTS
+    debug:
+      msg: "{{ update_count }}"
+
+
 #  - name: OBTAIN WINDOW SERVER IP ADDRESS
 #    azure_rm_publicipaddress_facts:
 #      subscription_id: "{{ my_subscription_id }}"
@@ -21,13 +25,3 @@
 #  - name: DISPLAY WINDOWS SERVER IP ADDRESS
 #    debug:
 #      msg: "{{ output_ip_address.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}"
-
-    – name: CHECK FOR MISSING UPDATES
-      win_updates:
-        category_names: SecurityUpdates
-        state: searched
-      register: update_count
-
-    - name: DISPLAY MISSING UPDATE RESULTS
-      debug:
-        msg: "{{ update_count }}"
