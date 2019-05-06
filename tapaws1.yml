@@ -7,7 +7,7 @@
     my_vm_name: anspocw2012
     my_vn_name: poc-vn
     my_sn_name: poc-sn
-
+  gather_facts: true
 #  tasks:
 #  - name: OBTAIN WINDOW SERVER IP ADDRESS
 #    azure_rm_publicipaddress_facts:
