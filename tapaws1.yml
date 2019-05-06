@@ -8,18 +8,18 @@
     my_vn_name: poc-vn
     my_sn_name: poc-sn
 
-  tasks:
-  - name: OBTAIN WINDOW SERVER IP ADDRESS
-    azure_rm_publicipaddress_facts:
-      subscription_id: "{{ my_subscription_id }}"
-      client_id: "{{ my_client_id }}"
-      secret: "{{ my_secret }}"
-      tenant: "{{ my_tenant }}"
-    register: output_ip_address
+#  tasks:
+#  - name: OBTAIN WINDOW SERVER IP ADDRESS
+#    azure_rm_publicipaddress_facts:
+#      subscription_id: "{{ my_subscription_id }}"
+#      client_id: "{{ my_client_id }}"
+#      secret: "{{ my_secret }}"
+#      tenant: "{{ my_tenant }}"
+#    register: output_ip_address
 
-  - name: DISPLAY WINDOWS SERVER IP ADDRESS
-    debug:
-      msg: "{{ output_ip_address.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}"
+#  - name: DISPLAY WINDOWS SERVER IP ADDRESS
+#    debug:
+#      msg: "{{ output_ip_address.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}"
 
   – name: CHECK FOR MISSING UPDATES
     win_updates:
