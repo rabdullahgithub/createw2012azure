@@ -7,7 +7,7 @@
     win_updates:
       category_names: SecurityUpdates
       state: searched
-    register: reboot
+    register: update_count
 
   - name: DISPLAY MISSING UPDATE RESULTS
     debug:
