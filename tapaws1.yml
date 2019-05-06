@@ -3,11 +3,11 @@
   hosts: all
 
   tasks:
-  – name: CHECK FOR MISSING UPDATES
+  - name: Update
     win_updates:
-      - category_names: SecurityUpdates
-      - state: searched
-    register: update_count
+      category_names: SecurityUpdates
+      state: searched
+    register: reboot
 
   - name: DISPLAY MISSING UPDATE RESULTS
     debug:
