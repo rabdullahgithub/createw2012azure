@@ -4,9 +4,9 @@
 
   tasks:
   – name: CHECK FOR MISSING UPDATES
-    win_update:
-      category_names: SecurityUpdates
-      state: searched
+    win_updates:
+      - category_names: SecurityUpdates
+      - state: searched
     register: update_count
 
   - name: DISPLAY MISSING UPDATE RESULTS
