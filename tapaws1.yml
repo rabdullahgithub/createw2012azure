@@ -22,12 +22,12 @@
 #    debug:
 #      msg: "{{ output_ip_address.ansible_facts.azure_publicipaddresses[0].properties.ipAddress }}"
 
-  – name: CHECK FOR MISSING UPDATES
-    win_updates:
-      category_names: SecurityUpdates
-      state: searched
-    register: update_count
+    – name: CHECK FOR MISSING UPDATES
+      win_updates:
+        category_names: SecurityUpdates
+        state: searched
+      register: update_count
 
-  - name: DISPLAY MISSING UPDATE RESULTS
-    debug:
-      msg: "{{ update_count }}"
+    - name: DISPLAY MISSING UPDATE RESULTS
+      debug:
+        msg: "{{ update_count }}"
