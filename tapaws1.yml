@@ -4,7 +4,7 @@
 
   tasks:
   – name: CHECK FOR MISSING UPDATES
-    win_updates:
+    win_update:
       category_names: SecurityUpdates
       state: searched
     register: update_count
