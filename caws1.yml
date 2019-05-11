@@ -2,8 +2,8 @@
 - name: AZURE CREATE W2012 R2 SERVER
   connection: local
   gather_facts: no
-  hosts: all
-#  hosts: localhost
+#  hosts: all
+  hosts: localhost
   vars:
     my_resource_group: MyResourceGroup
     my_vm_name: anspocw2012
