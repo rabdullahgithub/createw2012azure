@@ -9,7 +9,8 @@
       category_names: SecurityUpdates
       state: searched
     register: update_count
-#    when: something == 'something'
+    when: inventory_hostname == 'unpatched'
+
   - name: DISPLAY MISSING UPDATE RESULTS
     debug:
       msg: "{{ update_count }}"
