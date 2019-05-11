@@ -1,6 +1,7 @@
 ---
 - name: PATCH AZURE VM
   hosts: all
+  gather_facts: yes
 
   tasks:
   - name: Update
@@ -8,7 +9,7 @@
       category_names: SecurityUpdates
       state: searched
     register: update_count
-
+#    when: something == 'something'
   - name: DISPLAY MISSING UPDATE RESULTS
     debug:
       msg: "{{ update_count }}"
