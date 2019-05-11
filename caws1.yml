@@ -1,8 +1,7 @@
 ---
 - name: AZURE CREATE W2012 R2 SERVER
   connection: local
-  gather_facts: no
-#  hosts: all
+  gather_facts: no#  hosts: all
   hosts: localhost
   vars:
     my_resource_group: MyResourceGroup
@@ -64,22 +63,3 @@
       port: 5986
       host: '{{azure_vm.properties.networkProfile.networkInterfaces[0].properties.ipConfigurations[0].properties.publicIPAddress.properties.ipAddress}}'
       timeout: 600
-
-#  - name: GENERATE SECURITY UPDATE REPORT
-#    win_updates:
-#      category_names: SecurityUpdates
-#      state: searched
-#      log_path: /var/log/winsecurity/ansible_wu.txt
-#    register: server_security
-#    tags: gsur
-
-  - name: INSTALL SECURITY UPDATES
-    win_updates:
-      category_names: SecurityUpdates
-      state: installed
-    register: server_security
-    tags: gsur
-
-  - name: SECURITY UPDATE REPORT
-    debug: "{{ server_security }}"
-    tags: gsur
