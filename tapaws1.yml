@@ -7,7 +7,8 @@
   - name: Update
     win_updates:
       category_names: SecurityUpdates
-      state: installed
+      state: searched
+#      state: installed
     register: update_count
     when: inventory_hostname == 'unpatched'
 
