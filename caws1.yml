@@ -41,8 +41,8 @@
       state: present
       vm_size: Standard_D1
       storage_account_name: "{{ my_vm_name }}"
-      virtual_network_name: "{{ my_vn_name }}"
-      subnet_name: "{{ my_sn_name }}"
+      virtual_network_name: "{{ my_vn_name }}-VN"
+      subnet_name: "{{ my_sn_name }}-SN"
 
   - name: CREATE AZURE VM EXTENSION TO ENABLE HTTPS WINRM LISTENER
     azure_rm_virtualmachine_extension:
