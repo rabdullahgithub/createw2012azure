@@ -7,10 +7,10 @@
   - name: Update
     win_updates:
       category_names: SecurityUpdates
-#      state: searched
-      state: installed
+      state: searched
+#      state: installed
     register: update_count
-    when: inventory_hostname == 'unpatched'
+    when: inventory_hostname == 'winabc'
 
   - name: DISPLAY MISSING UPDATE RESULTS
     debug:
